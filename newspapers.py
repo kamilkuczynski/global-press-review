@@ -18,13 +18,13 @@ soup = bs4.BeautifulSoup(raw_data.text, 'lxml')
 fox_soup = bs4.BeautifulSoup(fox_data.text, 'lxml')
 dw_german_soup = bs4.BeautifulSoup(dw_germany_data.text, 'lxml')
 russian_soup = bs4.BeautifulSoup(russian_today_data.text, 'lxml')
-print(russian_soup.text)
+# print(russian_soup.text)
 
 
 titles = soup.select('.article-trending.u-clickable-card')
 fox_titles = fox_soup.select('.title > a')
 dw_titles = dw_german_soup.select('.news')
-russian_titles = russian_soup.select('.card-list')
+russian_titles = russian_soup.select('.card')
 print(russian_titles)
 
 list_of_titles = []
@@ -39,7 +39,7 @@ print("Fox News")
 for title in fox_titles[1:11]:
     list_of_titles.append(title.text.replace("\n",""))
 pprint.pprint(list_of_titles[7:12])
-'''
+
 
 print()
 german_titles = []
@@ -48,12 +48,12 @@ for title in dw_titles[1:6]:
     print(title.select('h2')[0].text, "\n", "https://www.dw.com"+title.select('a')[0]['href'])
 
     # german_titles.append(title.text.replace("\n" ,""))
-pprint.pprint(german_titles)
+pprint.pprint(german_titles)'''
 
 print("Russian Today - Russia")
 russian_list_titles = []
 for title in russian_titles:
-    russian_list_titles.append(title)
-    print(title.text)
+    russian_list_titles.append(title.text)
+    # print(title.text.)
 
-# pprint.pprint(russian_list_titles)
+pprint.pprint(russian_list_titles)
