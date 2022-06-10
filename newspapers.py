@@ -1,5 +1,5 @@
 #TODO 1: dodać linki
-#TODO 2: dodać foxnews
+#TODO 2: dodać foxnews, dw.de, russian Today, France24, any Chinese
 #TODO 3: dodać zapis do txt
 #TODO 4: zrobić gui w tkinker
 #TODO 5:
@@ -11,18 +11,21 @@ import requests
 raw_data = requests.get("https://www.aljazeera.com/")
 fox_data = requests.get("https://www.foxnews.com/")
 dw_germany_data = requests.get("https://www.dw.com/en/germany/s-1432")
+russian_today_data = requests.get("https://www.rt.com/")
 # print(fox_data)
 
 soup = bs4.BeautifulSoup(raw_data.text, 'lxml')
 fox_soup = bs4.BeautifulSoup(fox_data.text, 'lxml')
 dw_german_soup = bs4.BeautifulSoup(dw_germany_data.text, 'lxml')
-# print(fox_soup.text)
+russian_soup = bs4.BeautifulSoup(russian_today_data.text, 'lxml')
+print(russian_soup.text)
 
 
 titles = soup.select('.article-trending.u-clickable-card')
 fox_titles = fox_soup.select('.title > a')
 dw_titles = dw_german_soup.select('.news')
-# pprint.pprint(dw_titles)
+russian_titles = russian_soup.select('.card-list')
+print(russian_titles)
 
 list_of_titles = []
 '''
@@ -47,4 +50,10 @@ for title in dw_titles[1:6]:
     # german_titles.append(title.text.replace("\n" ,""))
 pprint.pprint(german_titles)
 
-# pprint.pprint(list_of_titles)
+print("Russian Today - Russia")
+russian_list_titles = []
+for title in russian_titles:
+    russian_list_titles.append(title)
+    print(title.text)
+
+# pprint.pprint(russian_list_titles)
