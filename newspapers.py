@@ -57,7 +57,7 @@ pprint.pprint(german_titles)
 print("Russian Today - Russia")
 russian_list_titles = []
 for title in russian_titles:
-    russian_list_titles.append(title.text)
+    russian_list_titles.append(title.text.strip())
     # print(title.text.)
 
 pprint.pprint(russian_list_titles)
