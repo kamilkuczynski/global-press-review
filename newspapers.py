@@ -74,10 +74,10 @@ print("Politics - South China Morning Post")
 
 for title in scmp_titles[1:6]:
     pprint.pprint(title.text.splitlines()[0])
-    pprint.pprint("https://www.scmp.com" + title.select("a")[0]['href'])
+    pprint.pprint(" https://www.scmp.com" + title.select("a")[0]['href'])
     print()
     list_of_titles.append(title.text.splitlines()[0] +
-                          "https://www.scmp.com" + title.select("a")[0]['href'])
+                          "\nhttps://www.scmp.com" + title.select("a")[0]['href'])
 # pprint.pprint(list_of_titles[7:12])
 
 # SAVE data to a file
