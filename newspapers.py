@@ -2,7 +2,6 @@
 # TODO 2: dodać foxnews, dw.de, russian Today, France24, any Chinese
 # TODO 3: dodać zapis do txt
 # TODO 4: zrobić gui w tkinker
-# TODO 5:
 
 
 import bs4
@@ -11,7 +10,7 @@ from datetime import datetime
 
 raw_data = requests.get("https://www.aljazeera.com/")
 fox_data = requests.get("https://www.foxnews.com/")
-dw_germany_data = requests.get("https://www.dw.com/en/germany/s-1432")
+dw_germany_data = requests.get("https://www.dw.com/")
 scmp_data = requests.get('https://www.scmp.com/news/china?module=mega_menu_news_int&pgtype=homepage')
 print(scmp_data)
 
@@ -36,7 +35,8 @@ list_of_titles.append("===== Al jazeera =====")
 for title in titles[0:5]:
     print(title.text)
     print("https://www.aljazeera.com/" + title.a['href'] + "\n")
-    list_of_titles.append(title.text)
+    list_of_titles.append(title.text + "\n"
+                          "https://www.aljazeera.com/" + title.a['href'] + "\n")
 
 
 print()
@@ -46,7 +46,8 @@ list_of_titles.append("===== Fox News =====")
 for title in fox_titles[1:5]:
     print(title.text)
     print(title['href'] + "\n")
-    list_of_titles.append(title.text.replace("\n", ""))
+    list_of_titles.append(title.text.replace("\n", "") + "\n" +
+                          title['href'] + "\n")
 
 
 print()
@@ -57,7 +58,8 @@ list_of_titles.append("=====Deutsche Welle - Germany=====")
 for title in dw_titles[1:6]:
     print(title.select('h2')[0].text.strip())
     print("https://www.dw.com" + title.select('a')[0]['href'] + "\n")
-    list_of_titles.append(title.text.replace("\n", ""))
+    list_of_titles.append(title.select('h2')[0].text.strip() + "\n" +
+                          "https://www.dw.com" + title.select('a')[0]['href'] + "\n")
 
 
 print()
@@ -67,13 +69,14 @@ list_of_titles.append("=====Politics - South China Morning Post=====")
 for title in scmp_titles[1:6]:
     print(title.text.strip())
     print(" https://www.scmp.com" + title.select("a")[0]['href'])
+    #We can left an empty line by function print()
     print()
     list_of_titles.append(title.text.splitlines()[0] +
                           "\nhttps://www.scmp.com" + title.select("a")[0]['href'])
 # pprint.pprint(list_of_titles[7:12])
 
 
-# SAVE data to a file
+# SAVE a data to a file
 
 date = datetime.today().strftime("%Y_%m_%d")
 
