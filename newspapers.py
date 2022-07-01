@@ -68,9 +68,9 @@ list_of_titles.append("=====Politics - South China Morning Post=====")
 
 for title in scmp_titles[1:6]:
     print(title.text.strip())
-    print(" https://www.scmp.com" + title.select("a")[0]['href'])
+    print(" https://www.scmp.com" + title.select("a")[0]['href']+ "\n")
     #We can left an empty line by function print()
-    print()
+
     list_of_titles.append(title.text.splitlines()[0] +
                           "\nhttps://www.scmp.com" + title.select("a")[0]['href'])
 # pprint.pprint(list_of_titles[7:12])
@@ -80,6 +80,12 @@ for title in scmp_titles[1:6]:
 
 date = datetime.today().strftime("%Y_%m_%d")
 
-with open(date + '_daily_word_news_review.txt', 'w') as file:
+try:
+    file =  open(date + '_daily_word_news_review.txt', 'w')
     for items in list_of_titles:
         file.writelines([items + '\n' + '\n'])
+except FileNotFoundError as error_message:
+    print("There was an error: ", error_message)
+finally:
+    file.close()
+    print("File was closed")
